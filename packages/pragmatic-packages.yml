@@ -1,0 +1,31 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  Registry searches on 2026-08-26 of npm (registry.npmjs.org search + package lookup), PyPI,
+  RubyGems, crates.io, and a GitHub organisation lookup for pragmaticsemi /
+  pragmatic-semiconductor / pragmaticsemiconductor / PragmaticSemi (all 404 Not Found).
+package_count: 0
+packages: []
+note: >-
+  Pragmatic ships no first-party client libraries, SDKs or CLIs in any public registry, and has
+  no GitHub organisation. Every npm result for the term "pragmatic" belongs to Atlassian's
+  unrelated @atlaskit/pragmatic-drag-and-drop family and is explicitly NOT this company - it is
+  the single most likely misattribution for this slug and is recorded here so a later round does
+  not claim it. PyPI, RubyGems and crates.io lookups for pragmaticsemi / flexic /
+  pragmatic-semiconductor all miss. No `SDKs` pointer is emitted.
+searched_registries:
+- registry: npm
+  query: pragmaticsemi, flexic, pragmatic-semiconductor
+  result: no first-party package
+- registry: pypi
+  query: pragmaticsemi, flexic, pragmatic-semiconductor
+  result: 404
+- registry: rubygems
+  query: pragmaticsemi
+  result: 404
+- registry: crates.io
+  query: flexic
+  result: no match
+- registry: github
+  query: pragmaticsemi, pragmatic-semiconductor, pragmaticsemiconductor, PragmaticSemi
+  result: 404 Not Found (no organisation)

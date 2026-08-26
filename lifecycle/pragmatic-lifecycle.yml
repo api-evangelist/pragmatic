@@ -1,0 +1,35 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  Searches of pragmaticsemi.com via web search (the origin itself answers our crawler with a
+  SiteGround captcha) plus live probes of api-portal.pragmaticsemi.com and status.pragmaticsemi.com.
+api: pragmatic:customer-portal-api
+versioning:
+  scheme: uri-path
+  current_version: v1
+  policy_published: false
+  evidence: https://api-portal.pragmaticsemi.com/v1/auth/login/ -> 405; /auth/login/ -> 404
+deprecation:
+  policy_published: false
+  sunset_header: not observed
+  deprecation_header: not observed
+  rfc8594: false
+  note: No deprecation or sunset policy is published. No `Deprecation` pointer is emitted.
+status_page:
+  published: false
+  probed:
+  - url: https://status.pragmaticsemi.com/
+    status: '000 (DNS does not resolve)'
+  note: No status page exists on a conventional host. No `StatusPage` pointer is emitted.
+sla:
+  published: false
+  note: >-
+    Pragmatic sells foundry capacity under bilateral commercial agreements; no public SLA
+    covering the customer portal or its API was found.
+changelog:
+  api_changelog_published: false
+  company_newsroom: https://www.pragmaticsemi.com/newsroom
+  note: >-
+    The newsroom carries corporate press releases and blog posts, not an API change log.
+    No `ChangeLog` pointer is emitted - a corporate newsroom is not a versioned API changelog.
+deprecated_operations: []

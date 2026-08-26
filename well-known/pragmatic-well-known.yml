@@ -1,0 +1,80 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  Direct HTTP probes of every Pragmatic-controlled host discovered in this pass
+  (www.pragmaticsemi.com, portal.pragmaticsemi.com, api-portal.pragmaticsemi.com).
+note: >-
+  No /.well-known document was served by any host. www.pragmaticsemi.com answers every path -
+  including /robots.txt - with an HTTP 202 SiteGround captcha interstitial ("sg-captcha: challenge",
+  169-byte meta-refresh to /.well-known/sgcaptcha/), so the origin was never reached; that is a
+  bot challenge against our crawler, not evidence the documents are absent. portal.pragmaticsemi.com
+  is a create-react-app SPA on S3/CloudFront and returns 403 for every unmapped key.
+  api-portal.pragmaticsemi.com returns a genuine JSON 404 envelope for every /.well-known path.
+  NO WellKnown or SecurityTxt pointer is emitted: not one path returned a real document.
+hosts:
+- host: www.pragmaticsemi.com
+  note: All responses are the SiteGround captcha interstitial (HTTP 202, text/html, 169-209 bytes).
+  documents:
+  - path: /.well-known/security.txt
+    status: 202
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 202
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 202
+    file: null
+  - path: /.well-known/api-catalog
+    status: 202
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 202
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 202
+    file: null
+  - path: /.well-known/agent.json
+    status: 202
+    file: null
+- host: portal.pragmaticsemi.com
+  note: CloudFront/S3 origin; 403 is the S3 no-such-key response, not a served document.
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 403
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+    file: null
+  - path: /.well-known/api-catalog
+    status: 403
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 403
+    file: null
+  - path: /.well-known/agent.json
+    status: 403
+    file: null
+- host: api-portal.pragmaticsemi.com
+  note: 'Real JSON 404 envelope: {"status":"error","message":"Resource not found.",...}'
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null

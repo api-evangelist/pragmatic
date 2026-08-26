@@ -1,0 +1,63 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  https://portal.pragmaticsemi.com/static/js/main.88bcd9f5.js - the Pragmatic Customer Portal's
+  own first-party JavaScript bundle, served from Pragmatic's domain; plus live unauthenticated
+  probes of https://api-portal.pragmaticsemi.com/.
+docs: null
+docs_note: >-
+  Pragmatic publishes no authentication documentation. There is no developer portal, no API
+  reference and no OpenAPI securitySchemes to derive from, so this profile is assembled ONLY
+  from routes the provider itself ships in its portal bundle and from status codes observed
+  on live unauthenticated requests. Nothing here is inferred beyond what was observed.
+api: pragmatic:customer-portal-api
+base_url: https://api-portal.pragmaticsemi.com/v1/
+public_signup: false
+access: customer-only
+schemes:
+- id: portal-session
+  type: http
+  scheme: bearer
+  in: header
+  name: Authorization
+  description: >-
+    The portal bundle sends an Authorization header on authenticated calls and stores a
+    validated token (a users/validate-token/ route exists). The exact token format is not
+    published and could not be observed without credentials.
+  confidence: medium
+  evidence: portal bundle references "authorization" header handling and a users/validate-token/ route
+mfa:
+  supported: true
+  factors:
+  - totp
+  - recovery-codes
+  evidence: >-
+    The portal bundle ships routes users/totp/create/, users/totp/login/, users/totp/login-update/,
+    users/totp/update/, auth/otpVerification and auth/recoveryCodeLogin - a TOTP enrolment and
+    verification flow with recovery-code fallback.
+  confidence: high
+observed_routes:
+- path: /v1/auth/login/
+  observed: GET returned 405 Method Not Allowed with a JSON envelope, confirming the route exists and is POST-only
+  status: 405
+- path: /auth/login/
+  observed: 404 - the unversioned prefix is not routed; /v1/ is the live prefix
+  status: 404
+account_protection:
+  ip_blocking: true
+  evidence: portal bundle ships auth/blocked-ips/ and auth/unblock-ip/ administrative routes
+password_flows:
+- users/forgot-password/
+- users/reset-password/
+- users/set-password/
+- users/change-password/
+oauth2: false
+openid_connect: false
+api_keys: false
+mutual_tls: false
+notes: >-
+  No OAuth 2.0 or OpenID Connect surface exists: /.well-known/openid-configuration and
+  /.well-known/oauth-authorization-server return 404 on api-portal.pragmaticsemi.com and are
+  unreachable behind the captcha on www.pragmaticsemi.com. No API-key issuance is documented
+  anywhere on the public site. This is a human-facing customer portal login, not a
+  programmatic credential surface an agent can obtain.

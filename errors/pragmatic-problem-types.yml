@@ -1,0 +1,44 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  Live unauthenticated HTTP requests to https://api-portal.pragmaticsemi.com/ on 2026-08-26.
+  There is no OpenAPI to derive 4xx/5xx responses from and no published error reference, so
+  every entry below is an error envelope actually returned to our probe.
+api: pragmatic:customer-portal-api
+format: vendor-json
+rfc9457: false
+content_type: application/json
+envelope:
+  shape: '{"status": "error", "message": "<human message>", "data": {"detail": "<same message>"}}'
+  fields:
+  - name: status
+    description: Constant "error" on failure.
+  - name: message
+    description: Human-readable summary, duplicated into data.detail.
+  - name: data.detail
+    description: Django REST Framework style detail string.
+  note: >-
+    The envelope carries no machine-readable error code, no type URI and no request id, so a
+    client cannot branch on anything but the HTTP status and an English string. This is a
+    Django REST Framework detail response wrapped in a custom envelope.
+problem_types:
+- status: 404
+  title: Resource not found.
+  detail: Resource not found.
+  observed_at:
+  - https://api-portal.pragmaticsemi.com/
+  - https://api-portal.pragmaticsemi.com/openapi.json
+  - https://api-portal.pragmaticsemi.com/auth/login/
+  remediation: >-
+    Use the versioned /v1/ prefix. The unversioned paths shipped in the portal bundle are
+    joined onto a /v1/ base at runtime.
+- status: 405
+  title: Method "GET" not allowed.
+  detail: Method "GET" not allowed.
+  observed_at:
+  - https://api-portal.pragmaticsemi.com/v1/auth/login/
+  remediation: POST to the login route; it does not answer GET.
+coverage_note: >-
+  Only unauthenticated failure modes could be observed. Authenticated 4xx semantics, validation
+  error shapes and any 5xx behaviour are not published and were not probed - no credentials were
+  used and none are publicly obtainable.

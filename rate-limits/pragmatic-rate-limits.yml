@@ -1,0 +1,29 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  Live unauthenticated requests to https://api-portal.pragmaticsemi.com/ on 2026-08-26, plus a
+  search for any published limits. Pragmatic publishes no API documentation.
+api: pragmatic:customer-portal-api
+limit_count: 0
+limits: []
+response_headers:
+  observed: []
+  x_ratelimit_family: not observed
+  ratelimit_family: not observed
+  retry_after: not observed
+  note: >-
+    No rate-limit headers of any family appeared on the responses we received. Full observed
+    header set on a 404 was: date, content-type, content-length, server (gunicorn),
+    x-frame-options, vary, x-content-type-options, referrer-policy, cross-origin-opener-policy.
+exhaustion_status: unknown
+note: >-
+  No rate limits are documented, because no API documentation exists. Deliberate abuse controls
+  DO exist - the portal bundle ships auth/blocked-ips/ and auth/unblock-ip/ routes, implying
+  IP-level blocking on repeated failed authentication - but that is an account-protection
+  mechanism, not a published, header-signalled rate limit an agent can back off against.
+  An honest zero: the number is unpublished, not zero-limits.
+evidence:
+- url: https://api-portal.pragmaticsemi.com/
+  status: 404
+- url: https://api-portal.pragmaticsemi.com/v1/auth/login/
+  status: 405

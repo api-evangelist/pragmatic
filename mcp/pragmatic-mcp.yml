@@ -1,0 +1,20 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  Probes of https://www.pragmaticsemi.com/, https://portal.pragmaticsemi.com/ and
+  https://api-portal.pragmaticsemi.com/ for an MCP endpoint, plus registry and web searches
+  for a published Pragmatic MCP server.
+status: none
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+tools: []
+note: >-
+  Pragmatic publishes no MCP server - neither a remote endpoint nor a stdio package. There is
+  also no OpenAPI to derive a candidate tool list from: the only API surface is the undocumented,
+  authentication-gated customer-portal backend. No `MCPServer` pointer is emitted, and no
+  endpoint is guessed. This file records a measured absence.

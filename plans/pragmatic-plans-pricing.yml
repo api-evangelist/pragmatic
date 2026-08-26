@@ -1,0 +1,27 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  Web search of pragmaticsemi.com and third-party coverage on 2026-08-26 for any pricing,
+  plans or rate card. The origin itself answers our crawler with a SiteGround captcha, so the
+  pricing surface was searched rather than fetched.
+api: pragmatic:customer-portal-api
+plan_count: 0
+plans: []
+pricing_page: null
+note: >-
+  Pragmatic publishes no plans, tiers or price list of any kind - not for API access and not for
+  its FlexIC Foundry service. It is a semiconductor foundry selling capacity and NRE under
+  bilateral commercial agreements; the public site routes commercial interest to sales@pragmaticsemi.com
+  and a contact form. Third-party material (EUROPRACTICE, which brokers access to Pragmatic's
+  foundry through imec) describes the offer qualitatively - "a fraction of the cost of silicon",
+  "low NRE", "tape-out to delivery in around six weeks" - but names no figure. The customer
+  portal API is a bundled part of an existing customer relationship, not a metered product,
+  so there is nothing to price. An honest zero: no `Pricing` pointer is emitted because no
+  pricing page exists to point at.
+evidence:
+- url: https://www.pragmaticsemi.com/foundry/
+  status: 202
+  note: SiteGround captcha interstitial; page exists and is search-indexed
+- url: https://www.pragmaticsemi.com/contact/
+  status: 202
+  note: SiteGround captcha interstitial; page exists and is search-indexed

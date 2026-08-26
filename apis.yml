@@ -1,8 +1,19 @@
 aid: pragmatic
 name: Pragmatic
-description: 'Pragmatic is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Pragmatic Semiconductor Limited is a UK semiconductor manufacturer that designs and
+  produces FlexICs - ultra-thin, physically flexible integrated circuits built on thin-film
+  transistor (TFT) technology rather than conventional crystalline silicon. Founded in 2010
+  by Richard Price and Scott White and headquartered at Cambridge Science Park with
+  manufacturing at Pragmatic Park in Sedgefield, County Durham, the company operates the
+  Pragmatic FlexIC Foundry, a service that takes third-party custom flexible IC designs from
+  tape-out to delivery in roughly six weeks. Product lines include the FlexIC Platform Gen 3
+  mixed-signal flexible ASIC design flow, Pragmatic NFC Connect and Pragmatic NFC Protect.
+  The company raised a $231M Series D in 2023. Its only network-reachable API surface is the
+  undocumented, authentication-gated backend of its customer portal; it publishes no
+  developer program, no machine-readable contract and no public API reference.
 url: https://raw.githubusercontent.com/api-evangelist/pragmatic/refs/heads/main/apis.yml
+image: ''
 x-type: company
 x-source: harvest:secondary-market
 x-tier: stub
@@ -12,12 +23,148 @@ created: '2026-08-26'
 modified: '2026-08-26'
 tags:
 - Company
-apis: []
+- Semiconductors
+- Hardware
+- Manufacturing
+- Flexible Electronics
+- Integrated Circuits
+- Foundry
+- NFC
+- RFID
+- Internet of Things
+- United Kingdom
+apis:
+- aid: pragmatic:customer-portal-api
+  name: Pragmatic Customer Portal API
+  description: >-
+    The first-party JSON API behind portal.pragmaticsemi.com, the Pragmatic Customer Portal.
+    Discovered by reading the portal's own published JavaScript bundle, which sets
+    REACT_APP_BASE_URL to https://api-portal.pragmaticsemi.com/ and REACT_APP_SOCKET_URL to
+    wss://api-portal.pragmaticsemi.com/ws/. The host is live and answers JSON (gunicorn,
+    Django REST Framework style envelopes), and https://api-portal.pragmaticsemi.com/v1/auth/login/
+    returns 405 Method Not Allowed to a GET, confirming a versioned /v1/ surface. Pragmatic
+    publishes no OpenAPI, no reference documentation and no developer portal for it - every
+    route requires an authenticated customer session, so this entry records a measured surface,
+    not a published contract.
+  humanURL: https://portal.pragmaticsemi.com/
+  baseURL: https://api-portal.pragmaticsemi.com/v1/
+  tags:
+  - Customer Portal
+  - Authentication
+  - Orders
+  x-contract: none-published
+  x-discovery: portal-javascript-bundle
+  properties:
+  - type: Login
+    url: https://portal.pragmaticsemi.com/
+  - type: Authentication
+    url: authentication/pragmatic-authentication.yml
+  - type: ErrorCatalog
+    url: errors/pragmatic-problem-types.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/pragmatic-domain-security.yml
 - type: Website
+  url: https://www.pragmaticsemi.com/
+- type: SecondaryMarketListing
   url: https://www.hiive.com/securities/pragmatic-stock
+- type: Blog
+  url: https://www.pragmaticsemi.com/newsroom
+- type: Support
+  url: https://www.pragmaticsemi.com/contact/
+- type: TermsOfService
+  url: https://www.pragmaticsemi.com/terms-of-use
+- type: PrivacyPolicy
+  url: https://www.pragmaticsemi.com/privacy-policy
+- type: Login
+  url: https://portal.pragmaticsemi.com/
+- type: Investors
+  url: https://www.pragmaticsemi.com/investors
+- type: Careers
+  url: https://talent.pragmaticsemi.com/
+- type: LLMsTxt
+  url: llms/pragmatic-llms.txt
+- type: Authentication
+  url: authentication/pragmatic-authentication.yml
+- type: ErrorCatalog
+  url: errors/pragmatic-problem-types.yml
+- type: Conventions
+  url: conventions/pragmatic-conventions.yml
+- type: Lifecycle
+  url: lifecycle/pragmatic-lifecycle.yml
+- type: Plans
+  url: plans/pragmatic-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/pragmatic-rate-limits.yml
+- type: Packages
+  url: packages/pragmatic-packages.yml
+
+x-pointer-verification:
+  checked: '2026-08-26'
+  note: >-
+    Every common[] URL was fetched with a browser User-Agent on 2026-08-26. All
+    www.pragmaticsemi.com pointers return HTTP 202 carrying a SiteGround captcha interstitial
+    ("sg-captcha: challenge") rather than page content - including /robots.txt. Per the
+    enrichment contract a bot challenge is NOT a dead pointer: each of these pages is
+    search-indexed under its real title, so the pages demonstrably exist and only our crawler
+    was turned away. portal.pragmaticsemi.com, talent.pragmaticsemi.com and the Hiive listing
+    returned a clean 200.
+  results:
+  - url: https://www.pragmaticsemi.com/
+    status: 202
+    verdict: bot-challenge
+  - url: https://www.pragmaticsemi.com/newsroom
+    status: 202
+    verdict: bot-challenge
+  - url: https://www.pragmaticsemi.com/contact/
+    status: 202
+    verdict: bot-challenge
+  - url: https://www.pragmaticsemi.com/terms-of-use
+    status: 202
+    verdict: bot-challenge
+  - url: https://www.pragmaticsemi.com/privacy-policy
+    status: 202
+    verdict: bot-challenge
+  - url: https://www.pragmaticsemi.com/investors
+    status: 202
+    verdict: bot-challenge
+  - url: https://portal.pragmaticsemi.com/
+    status: 200
+    verdict: live
+  - url: https://talent.pragmaticsemi.com/
+    status: 200
+    verdict: live
+  - url: https://www.hiive.com/securities/pragmatic-stock
+    status: 200
+    verdict: live
+
+x-enrichment:
+  date: '2026-08-26'
+  status: minimal
+  artifacts_added: 11
+  pass: local-v1
+
+x-coverage:
+  state: gated
+  reason: customer-only-docs
+  detail: >-
+    Pragmatic ships a real, live first-party JSON API - api-portal.pragmaticsemi.com/v1/, the
+    backend of its Customer Portal, found by reading the portal's own JavaScript bundle - but
+    publishes no reference, no OpenAPI and no developer portal for it; GET /v1/auth/login/
+    answers 405 Method Not Allowed, proving the route exists while every route beyond it needs
+    an authenticated foundry-customer session.
+  evidence:
+  - url: https://api-portal.pragmaticsemi.com/v1/auth/login/
+    status: 405
+  - url: https://api-portal.pragmaticsemi.com/openapi.json
+    status: 404
+  - url: https://portal.pragmaticsemi.com/
+    status: 200
+  - url: https://www.pragmaticsemi.com/llms.txt
+    status: 202
+  checked: '2026-08-26'

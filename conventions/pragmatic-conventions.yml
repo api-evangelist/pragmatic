@@ -1,0 +1,73 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  Live probes of https://api-portal.pragmaticsemi.com/ and the first-party portal bundle at
+  https://portal.pragmaticsemi.com/static/js/main.88bcd9f5.js. Pragmatic publishes no API
+  documentation, so nothing here is taken from a docs page - only from observed behaviour.
+api: pragmatic:customer-portal-api
+authentication:
+  style: bearer-token-in-authorization-header
+  public_signup: false
+  detail: see authentication/pragmatic-authentication.yml
+versioning:
+  style: uri-path
+  current: v1
+  evidence: https://api-portal.pragmaticsemi.com/v1/auth/login/ answers 405; the unversioned /auth/login/ answers 404
+  policy_published: false
+error_envelope:
+  style: vendor-json
+  shape: '{"status","message","data.detail"}'
+  rfc9457: false
+  detail: see errors/pragmatic-problem-types.yml
+transport:
+  https: true
+  hsts: true
+  http2: true
+  websocket: wss://api-portal.pragmaticsemi.com/ws/
+  server: gunicorn
+  security_headers_observed:
+  - x-frame-options: DENY
+  - x-content-type-options: nosniff
+  - referrer-policy: same-origin
+  - cross-origin-opener-policy: same-origin
+  cors:
+    vary_origin: true
+    note: 'Responses carry `vary: origin`, indicating per-origin CORS handling.'
+idempotency:
+  supported: unknown
+  published: false
+  note: >-
+    No idempotency key header, scope or retention policy is documented anywhere, and none could
+    be observed without an authenticated session. NOT asserted, and deliberately NOT wired as a
+    type Idempotency pointer - there is no evidence Pragmatic supports it.
+pagination:
+  style: unknown
+  published: false
+  note: Could not be observed; every collection route requires authentication.
+field_expansion:
+  supported: unknown
+  published: false
+request_id_tracing:
+  supported: unknown
+  published: false
+  note: No request-id or correlation header appeared on any observed response.
+rate_limit_signaling:
+  headers_observed: []
+  published: false
+  detail: see rate-limits/pragmatic-rate-limits.yml
+reversibility:
+  grade: none
+  state: undocumented
+  write_surface: unknown
+  reversal_operations: []
+  note: >-
+    Pragmatic publishes no API reference, so there is no documented write surface and therefore
+    no documented reversal operation or window. The portal bundle shows write-shaped routes
+    (users/add, users/edit, users/deleted-users/, users/reset-password/) implying create/update/
+    delete and a soft-delete list that may be restorable, but NO reversal operation and NO window
+    is stated by the provider anywhere. This is recorded as undocumented rather than `na`
+    (the API is not read-only) and rather than `documented` (no reversal path is published).
+    Asserting a window here would be an invented fact.
+  dry_run_mode:
+    supported: unknown
+    published: false
