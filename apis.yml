@@ -13,6 +13,9 @@ description: >-
   undocumented, authentication-gated backend of its customer portal; it publishes no
   developer program, no machine-readable contract and no public API reference.
 url: https://raw.githubusercontent.com/api-evangelist/pragmatic/refs/heads/main/apis.yml
+x-api-posture: no-product-api
+x-api-posture-basis: observed
+x-api-posture-note: "Its only network-reachable API surface is the undocumented, authentication-gated backend of its customer portal; it publishes no developer program, no machine-readable contract and no public API refer"
 deliveryModel:
   model: saas
   open_source: false
