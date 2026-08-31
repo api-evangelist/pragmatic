@@ -65,6 +65,10 @@ apis:
   tags:
   - Customer Portal
   - Authentication
+  - Order
+  tags_raw:
+  - Customer Portal
+  - Authentication
   - Orders
   x-contract: none-published
   x-discovery: portal-javascript-bundle
